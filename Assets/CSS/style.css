@@ -87,12 +87,18 @@ body {
         transition: transform 0.3s ease, color 0.3s ease;
     }
 
+    .navbar-toggler:focus {
+        outline: none;
+        box-shadow: none;
+      }
+      
+
     .navbar-collapse {
         position: absolute;
         top: 100%;
         right: 0;
         width: 100%;
-        background: rgba(255, 255, 255, 0.89);
+        background: rgba(255, 255, 255, 0.944);
     }
 }
 
@@ -209,8 +215,9 @@ body {
 @media (max-width: 768px) {
     .stat-card {
         flex-direction: column;
-        gap: 20px; /* Stack vertically on smaller screens */
-        width: 50%;
+        gap: 50px; /* Stack vertically on smaller screens */
+        width: 60%;
+        height: 26em;
     }
 
     .stat-box {
