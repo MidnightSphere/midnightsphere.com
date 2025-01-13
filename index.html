@@ -30,6 +30,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="Assets/CSS/style.css">
 </head>
 
@@ -42,8 +43,9 @@
                     <img src="Assets/Images/Logo/Midnight Sphere Name Logo-removebg.png" alt="Logo 2" class="ms-2">
                 </a>
 
-                <button class="navbar-toggler" id="menuToggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" id="menuToggle" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="menu-icon">&#9776;</span>
                     <!-- <span class="menu-icon"><img src="Assets/Images/menu_icon.png" alt=""></span> -->
                 </button>
@@ -57,7 +59,7 @@
                             <a class="nav-link" href="#about">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
+                            <a class="nav-link" href="#our-services">Our Services</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact Us</a>
@@ -100,34 +102,93 @@
                 <p>Happy Clients</p>
             </div>
             <div class="stat-box">
-                <h2><span class="stat-number" data-target="100">0</span>+</h2>
+                <h2><span class="stat-number" data-target="50">0</span>+</h2>
                 <p>Visitors</p>
             </div>
         </div>
     </section>
 
-<!-- About Us Section -->
-<section class="about-us" id="about">
-    <h2 class="about-us-title">About <span>Us</span></h2>
-    <div class="container">
-      <div class="row about-us-content">
-        <!-- Left Side Image -->
-        <div class="col-lg-6 about-image mb-4 mb-lg-0">
-          <img src="https://via.placeholder.com/500x300?text=IT+Services" alt="IT Services">
+    <!-- About Us Section -->
+    <section class="about-us" id="about">
+        <h2 class="about-us-title">About <span>Us</span></h2>
+        <div class="container">
+            <div class="row about-us-content">
+                <!-- Left Side Image -->
+                <div class="col-lg-6 about-image mb-4 mb-lg-0">
+                    <img src="https://via.placeholder.com/500x300?text=IT+Services" alt="IT Services">
+                </div>
+                <!-- Right Side Content -->
+                <div class="col-lg-6 about-text">
+                    <p>
+                        Welcome to Midnight Sphere, where innovation meets excellence in the digital realm. Guided by
+                        our mantra, "Your Ideas, Our Midnight Magic," we specialize in transforming your creative
+                        visions into impactful digital solutions. We are a forward-thinking IT company dedicated to
+                        delivering transformative solutions that empower businesses to thrive in today’s fast-paced,
+                        technology-driven world. With a team of highly skilled professionals and a passion for creating
+                        impactful digital experiences, we specialize in crafting tailored solutions that align with your
+                        unique goals and vision.
+                    </p>
+                </div>
+            </div>
+            <!-- Read More Button -->
+            <div class="text-center mt-4">
+                <a href="#more" class="read-more-btn">Read More</a>
+            </div>
         </div>
-        <!-- Right Side Content -->
-        <div class="col-lg-6 about-text">
-          <p>
-            Welcome to Midnight Sphere, where innovation meets excellence in the digital realm. Guided by our mantra, "Your Ideas, Our Midnight Magic," we specialize in transforming your creative visions into impactful digital solutions. We are a forward-thinking IT company dedicated to delivering transformative solutions that empower businesses to thrive in today’s fast-paced, technology-driven world. With a team of highly skilled professionals and a passion for creating impactful digital experiences, we specialize in crafting tailored solutions that align with your unique goals and vision.
-          </p>
+    </section>
+
+
+    <section id="our-services" class="py-6">
+        <div class="container">
+            <h2 class="text-center mb-4"><span>Our</span> Services</h2>
+            <div class="row g-4">
+                <!-- Service 1: Custom Web Development -->
+                <div class="col-md-4">
+                    <div class="card service-card h-100 text-center">
+                        <div class="card-body">
+                            <div class="service-icon mb-3">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h5 class="card-title">Custom Web Development</h5>
+                            <p class="card-text">Create fully tailored, responsive, and functional websites designed to
+                                meet your business needs.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 2: SEO Optimization -->
+                <div class="col-md-4">
+                    <div class="card service-card h-100 text-center">
+                        <div class="card-body">
+                            <div class="service-icon mb-3">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h5 class="card-title">SEO Optimization</h5>
+                            <p class="card-text">Enhance your online visibility and drive organic traffic with proven
+                                SEO strategies.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 3: Digital Marketing Services -->
+                <div class="col-md-4">
+                    <div class="card service-card h-100 text-center">
+                        <div class="card-body">
+                            <div class="service-icon mb-3">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <h5 class="card-title">Digital Marketing Services</h5>
+                            <p class="card-text">Reach your target audience with data-driven campaigns and effective
+                                digital marketing solutions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- More Services Button -->
+            <div class="text-center" id="servicebtn">
+                <button class="btn btn-primary">More Services</button>
+            </div>
         </div>
-      </div>
-      <!-- Read More Button -->
-      <div class="text-center mt-4">
-        <a href="#more" class="read-more-btn">Read More</a>
-      </div>
-    </div>
-  </section>
+    </section>
+
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

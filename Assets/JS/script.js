@@ -102,3 +102,4 @@ const sectionObserver = new IntersectionObserver((entries) => {
 
 // Observe each section
 sections.forEach(section => sectionObserver.observe(section));
+
