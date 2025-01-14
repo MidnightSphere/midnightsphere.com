@@ -47,9 +47,9 @@ body {
     text-decoration: underline;
 }
 
-.menu-icon {
+/* .menu-icon {
     font-size: 1.7rem;
-}
+} */
 
 @media (max-width: 468px) {
 
@@ -204,7 +204,11 @@ body {
 
 .stats-section h1 span,
 .about-us span,
-#our-services span {
+#our-services span,
+#portfolio span,
+#our-special-features span,
+#clients-words span,
+#contact-us span {
     color: #1404fa;
 }
 
@@ -343,7 +347,7 @@ body {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-#servicebtn{
+#servicebtn {
     padding-top: 3em;
 }
 
@@ -372,8 +376,467 @@ body {
         font-size: 0.8rem;
     }
 
-    #our-services .btn-primary {
+    /* #our-services .btn-primary {
         padding: 6px 12px;
         font-size: 0.8rem;
+    } */
+}
+
+/* Portfolio Section */
+#portfolio {
+    padding: 3rem 1rem;
+}
+
+#portfolio h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    /* padding-bottom: 0.5em; */
+}
+
+#portfolio p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.portfolio-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9f9;
+    height: 10em;
+}
+
+.portfolio-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio-card img {
+    border-bottom: 5px solid #007bff;
+}
+
+.portfolio-card .card-body {
+    padding: 1rem;
+    text-align: center;
+}
+
+.portfolio-card .card-title {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.portfolio-card .card-text {
+    color: #777;
+    font-size: 0.95rem;
+}
+
+/* Media Queries */
+@media (max-width: 576px) {
+    #portfolio {
+        padding: 2rem 1rem;
+    }
+
+    .portfolio-card .card-body {
+        padding: 0.8rem;
+    }
+
+    .portfolio-card .card-title {
+        font-size: 1rem;
+    }
+
+    .portfolio-card .card-text {
+        font-size: 0.85rem;
+    }
+}
+
+
+/* Our Special Features Section */
+#our-special-features {
+    padding: 2rem 1rem;
+}
+
+#our-special-features h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding-top: 2em;
+    padding-bottom: 1em;
+}
+
+.feature-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f8f9fa;
+    height: 11em;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: #007bff;
+}
+
+.feature-card .card-title {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+.feature-card .card-text {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 576px) {
+    #our-special-features {
+        padding: 1.5rem 1rem;
+    }
+
+    .feature-card {
+        padding: 1rem;
+    }
+
+    .feature-icon {
+        font-size: 2rem;
+    }
+
+    .feature-card .card-title {
+        font-size: 1rem;
+    }
+
+    .feature-card .card-text {
+        font-size: 0.85rem;
+    }
+}
+
+
+/* Client's Words Section */
+#clients-words {
+    padding: 3rem 1rem;
+}
+
+#clients-words h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding-top: 1em;
+    /* padding-bottom: 0.1em; */
+}
+
+#clients-words p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.testimonial-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    height: 17em;
+}
+
+.testimonial-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.rating {
+    font-size: 1.2rem;
+    color: #f4b400;
+    /* Gold color for stars */
+    margin-bottom: 1rem;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.client-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.client-img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    border: 3px solid #007bff;
+}
+
+.client-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.client-company {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: -0.3rem;
+    font-style: italic;
+}
+
+
+/* Media Queries */
+@media (max-width: 576px) {
+    #clients-words {
+        padding: 2rem 1rem;
+    }
+
+    .testimonial-card {
+        padding: 1rem;
+    }
+
+    .rating {
+        font-size: 1rem;
+    }
+
+    .testimonial-text {
+        font-size: 0.9rem;
+    }
+
+    .client-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .client-name {
+        font-size: 0.9rem;
+    }
+
+    .client-company {
+        font-size: 0.8rem;
+        margin-top: -0.2rem;
+    }
+}
+
+/* Contact Us Section */
+.contact-us {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding-top: 1em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.section-description {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.contact-details {
+    text-align: left;
+    padding: 20px;
+}
+
+.contact-details .detail-item {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.contact-form {
+    text-align: left;
+    padding: 20px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-group.col-6 {
+    flex: 1;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+}
+
+.send-message-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.send-message-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    /* .contact-details {
+      text-align: center;
+    } */
+
+    .form-group.col-6 {
+        width: 100%;
+    }
+
+    .form-control {
+        font-size: 0.9rem;
+    }
+
+    .send-message-btn {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}
+
+/* Footer Section */
+.footer {
+    background-color: #222;
+    color: #fff;
+    padding: 32px 20px;
+    font-size: 0.9rem;
+}
+
+.footer .footer-company-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #f8f9fa;
+}
+
+.footer .footer-description {
+    margin-bottom: 20px;
+    color: #bbb;
+    line-height: 1.5;
+}
+
+.footer .social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.footer .social-icon {
+    display: inline-block;
+    margin: 5px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    font-size: 18px;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.footer .social-icon:hover {
+    color: #007bff;
+}
+
+.footer .footer-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #f8f9fa;
+}
+
+.footer .footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer .footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer .footer-links a {
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer .footer-links a:hover {
+    color: #007bff;
+}
+
+.footer .footer-right p {
+    margin-bottom: 10px;
+}
+
+.footer .footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.8rem;
+    color: #bbb;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer .row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer .footer-left,
+    .footer .footer-middle,
+    .footer .footer-right {
+        margin-bottom: 20px;
+    }
+
+    .footer .social-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer .footer-company-name {
+        font-size: 1.3rem;
+    }
+
+    .footer .footer-title {
+        font-size: 1rem;
+    }
+
+    .footer .social-icon {
+        font-size: 1.2rem;
     }
 }
