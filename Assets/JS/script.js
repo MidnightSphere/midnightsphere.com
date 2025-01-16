@@ -1,3 +1,17 @@
+
+// Wait for the page to load completely
+window.onload = function () {
+  // Start fade-out animation and hide the splash screen
+  setTimeout(function () {
+    const splashScreen = document.getElementById('splash-screen');
+    splashScreen.style.opacity = '0'; // Start fade-out
+    setTimeout(function () {
+      splashScreen.style.display = 'none'; // Hide after fade-out
+      document.getElementById('main-content').style.display = 'block';
+    }, 1000); // Match fade-out transition duration (1 second)
+  }, 4000); // Total duration of splash animations before fade-out
+};
+
 // Menu toggle functionality
 const menuToggle = document.getElementById('menuToggle');
 const navbarNav = document.getElementById('navbarNav');

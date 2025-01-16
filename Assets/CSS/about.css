@@ -320,3 +320,24 @@
         font-size: 1.2rem;
       }
     }
+
+    .footer .custom-shape-divider-top-1737023059 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+  }
+  
+  .footer .custom-shape-divider-top-1737023059 svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 102px;
+      transform: rotateY(180deg);
+  }
+  
+  .footer .custom-shape-divider-top-1737023059 .shape-fill {
+      fill: #FFFFFF;
+  }
