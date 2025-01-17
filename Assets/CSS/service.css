@@ -115,8 +115,14 @@ body {
     color: #1404fa;
 }
 
+@media (max-width:992px){
+    #our-services h2 {
+        padding-top: 2em;
+    }
+}
+
 .service-card {
-    background-color: #f8f9fa;
+    background-color: #f6f5f5;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -149,6 +155,11 @@ body {
     color: #fff;
     padding: 32px 20px;
     font-size: 0.9rem;
+    position: relative;
+}
+
+.footer .container {
+    padding-top: 5.5em;
 }
 
 .footer .footer-company-name {

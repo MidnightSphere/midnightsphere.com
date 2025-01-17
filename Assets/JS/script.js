@@ -9,7 +9,7 @@ window.onload = function () {
       splashScreen.style.display = 'none'; // Hide after fade-out
       document.getElementById('main-content').style.display = 'block';
     }, 1000); // Match fade-out transition duration (1 second)
-  }, 4000); // Total duration of splash animations before fade-out
+  }, 3000); // Total duration of splash animations before fade-out
 };
 
 // Menu toggle functionality
