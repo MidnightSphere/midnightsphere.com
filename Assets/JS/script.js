@@ -1,56 +1,89 @@
+// Check if the user is directly accessing the home page
+const referrer = document.referrer; // Get the referrer URL
+const homeURL = window.location.origin + "/"; // The home page URL (adjust as needed)
 
-// Wait for the page to load completely
-window.onload = function () {
-  // Start fade-out animation and hide the splash screen
-  setTimeout(function () {
-    const splashScreen = document.getElementById('splash-screen');
-    splashScreen.style.opacity = '0'; // Start fade-out
+if (referrer && referrer.startsWith(window.location.origin)) {
+  // If the referrer is from the same website, skip the splash screen
+  document.getElementById("splash-screen").style.display = "none";
+  document.getElementById("main-content").style.display = "block";
+} else {
+  window.onload = function () {
+    // Start fade-out animation and hide the splash screen
     setTimeout(function () {
-      splashScreen.style.display = 'none'; // Hide after fade-out
-      document.getElementById('main-content').style.display = 'block';
-    }, 1000); // Match fade-out transition duration (1 second)
-  }, 3000); // Total duration of splash animations before fade-out
-};
+      const splashScreen = document.getElementById("splash-screen");
+      splashScreen.style.opacity = "0"; // Start fade-out
+      setTimeout(function () {
+        splashScreen.style.display = "none"; // Hide after fade-out
+        document.getElementById("main-content").style.display = "block";
+      }, 1000); // Match fade-out transition duration (1 second)
+    }, 2500); // Total duration of splash animations before fade-out
+  };
+}
 
 // Menu toggle functionality
-const menuToggle = document.getElementById('menuToggle');
-const navbarNav = document.getElementById('navbarNav');
+const menuToggle = document.getElementById("menuToggle");
+const navbarNav = document.getElementById("navbarNav");
 
-menuToggle.addEventListener('click', function () {
-  const isExpanded = navbarNav.classList.contains('show');
-  const menuIcon = document.querySelector('.menu-icon');
+menuToggle.addEventListener("click", function () {
+  const isExpanded = navbarNav.classList.contains("show");
+  const menuIcon = document.querySelector(".menu-icon");
 
   // Toggle menu icon
   if (isExpanded) {
-    menuIcon.innerHTML = '&#9776;'; // Hamburger Icon
+    menuIcon.innerHTML = "&#9776;"; // Hamburger Icon
   } else {
-    menuIcon.innerHTML = '&times;'; // Close Icon
+    menuIcon.innerHTML = "&times;"; // Close Icon
   }
 });
 
 // Reset menu icon when menu is hidden
-navbarNav.addEventListener('hidden.bs.collapse', function () {
-  const menuIcon = document.querySelector('.menu-icon');
-  menuIcon.innerHTML = '&#9776;'; // Reset to Hamburger Icon
+navbarNav.addEventListener("hidden.bs.collapse", function () {
+  const menuIcon = document.querySelector(".menu-icon");
+  menuIcon.innerHTML = "&#9776;"; // Reset to Hamburger Icon
 });
 
 // Automatically close the menu when a link is clicked
-document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-  link.addEventListener('click', () => {
-    const navbarCollapse = document.querySelector('.navbar-collapse');
-    if (navbarCollapse.classList.contains('show')) {
-      const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: true });
+document.querySelectorAll(".navbar-nav .nav-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    const navbarCollapse = document.querySelector(".navbar-collapse");
+    if (navbarCollapse.classList.contains("show")) {
+      const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+        toggle: true,
+      });
       bsCollapse.hide();
     }
   });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const navbar = document.querySelector(".navbar");
+  const heroSection = document.querySelector(".hero-section");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navbar.classList.add("navbar-colored");
+          navbar.classList.remove("navbar-white");
+        } else {
+          navbar.classList.add("navbar-white");
+          navbar.classList.remove("navbar-colored");
+        }
+      });
+    },
+    { threshold: 0.1 } // Adjust the threshold as needed
+  );
+
+  observer.observe(heroSection);
+});
+
+
 // Animate numbers in stats section
 function animateNumbers() {
-  const stats = document.querySelectorAll('.stat-number');
+  const stats = document.querySelectorAll(".stat-number");
 
-  stats.forEach(stat => {
-    const target = +stat.getAttribute('data-target'); // Get the target number
+  stats.forEach((stat) => {
+    const target = +stat.getAttribute("data-target"); // Get the target number
     let current = 0;
     const increment = target / 90; // Adjust the speed of animation
 
@@ -69,34 +102,37 @@ function animateNumbers() {
 }
 
 // Trigger animation when the stats section comes into view
-const statsObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      animateNumbers(); // Animate numbers
-      statsObserver.unobserve(entry.target); // Stop observing once animated
-    }
-  });
-}, {
-  threshold: 0.5 // Trigger animation when 50% of the section is in view
-});
+const statsObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateNumbers(); // Animate numbers
+        statsObserver.unobserve(entry.target); // Stop observing once animated
+      }
+    });
+  },
+  {
+    threshold: 0.5, // Trigger animation when 50% of the section is in view
+  }
+);
 
 // Observe the stats section
-const statsSection = document.querySelector('.stats-section');
+const statsSection = document.querySelector(".stats-section");
 if (statsSection) {
   statsObserver.observe(statsSection);
 }
 
 // Highlight active navbar link based on the section in view
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-link");
 
 function removeActiveClasses() {
-  navLinks.forEach(link => link.classList.remove('active'));
+  navLinks.forEach((link) => link.classList.remove("active"));
 }
 
 function addActiveClass(sectionId) {
   const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-  if (activeLink) activeLink.classList.add('active');
+  if (activeLink) activeLink.classList.add("active");
 }
 
 const sectionObserverOptions = {
@@ -105,7 +141,7 @@ const sectionObserverOptions = {
 };
 
 const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
+  entries.forEach((entry) => {
     if (entry.isIntersecting) {
       const sectionId = entry.target.id;
       removeActiveClasses(); // Remove 'active' from all links
@@ -115,5 +151,4 @@ const sectionObserver = new IntersectionObserver((entries) => {
 }, sectionObserverOptions);
 
 // Observe each section
-sections.forEach(section => sectionObserver.observe(section));
-
+sections.forEach((section) => sectionObserver.observe(section));

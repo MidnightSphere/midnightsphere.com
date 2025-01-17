@@ -146,7 +146,7 @@ body {
 
 .card {
   background-color: #f6f5f5;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgb(0 0 0 / 33%);
   border: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   padding: 1rem;
@@ -182,9 +182,18 @@ body {
     margin-top: 3em;
   }
 
+  .card {
+    background-color: #dedede87;
+  }
+
 }
 
 @media (max-width: 576px) {
+
+  #vision-mission .row{
+    gap: 2em;
+  }
+  
   .about-image img {
     width: 50%;
     margin-left: 4em;

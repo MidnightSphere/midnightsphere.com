@@ -82,6 +82,10 @@ body {
     /* box-shadow: 0 1px 6px #77a8ffc9; */
 }
 
+.navbar {
+    transition: background-color 0.3s ease;
+}
+
 .navbar-brand img {
     max-height: 40px;
 }
@@ -225,6 +229,7 @@ body {
     max-width: 45%;
     height: auto;
     margin-left: 12em;
+    transform: scaleX(-1);
 }
 
 .custom-shape-divider-bottom-1737022219 {
@@ -291,6 +296,20 @@ body {
 
 }
 
+@media (min-width:768px) and (max-width:1024px) {
+    .hero-image img {
+        max-width: 75%;
+        margin-left: 3em;
+    }
+}
+
+@media (min-width:1024px) and (max-width:1200px) {
+    .hero-image img {
+        max-width: 70%;
+        margin-left: 7em;
+    }
+}
+
 .stats-section {
     background-color: #fff;
     padding: 50px 20px;
@@ -334,7 +353,6 @@ body {
 .about-us span,
 #our-services span,
 #portfolio span,
-#our-special-features span,
 #clients-words span,
 #contact-us span {
     color: #1404fa;
@@ -353,7 +371,23 @@ body {
     margin-top: 10px;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
+    .stat-card {
+        flex-direction: column;
+        gap: 50px; */
+/* Stack vertically on smaller screens */
+/* width: 60%;
+        height: 26em;
+    } */
+
+/* .stat-box {
+        width: 100%;
+        max-width: 300px; */
+/* Ensure each stat doesn't stretch too wide */
+/* }
+} */
+
+@media (max-width: 468px) {
     .stat-card {
         flex-direction: column;
         gap: 50px;
@@ -426,14 +460,14 @@ body {
 
 
 @media (max-width:992px) {
-    .about-image img{
+    .about-image img {
         width: 70%;
         margin-left: 1.5em;
     }
 }
 
 @media (max-width:576px) {
-    .about-image img{
+    .about-image img {
         width: 50%;
         margin-left: 4em;
     }
@@ -453,7 +487,7 @@ body {
 
 .service-card {
     background-color: #f6f5f5;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgb(0 0 0 / 33%);
     border: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     padding: 1rem;
@@ -503,6 +537,10 @@ body {
 /* Media Query for Mobile Devices */
 @media (max-width: 576px) {
 
+    #our-services .row {
+        gap: 1.5em;
+    }
+
     .service-card {
         padding: 0.75rem;
     }
@@ -525,6 +563,12 @@ body {
     } */
 }
 
+@media (max-width:992px) {
+    .service-card {
+        background-color: #dedede87;
+    }
+}
+
 /* Portfolio Section */
 #portfolio {
     padding: 3rem 1rem;
@@ -545,7 +589,7 @@ body {
     border: none;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgb(0 0 0 / 33%);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     background-color: #f6f5f5;
     height: 10em;
@@ -584,6 +628,10 @@ body {
         padding: 2rem 1rem;
     }
 
+    #portfolio .row {
+        gap: 2em;
+    }
+
     .portfolio-card .card-body {
         padding: 0.8rem;
     }
@@ -598,14 +646,21 @@ body {
 }
 
 @media (min-width:768px) and (max-width:1024px) {
-    .portfolio-card{
-        height: 15em;
+    .portfolio-card {
+        height: 12em;
+    }
+}
+
+@media (max-width:992px) {
+    .portfolio-card {
+        background-color: #dedede87;
     }
 }
 
 /* Our Special Features Section */
 #our-special-features {
-    padding: 2rem 1rem;
+    padding: 2.5rem 1rem;
+    background-image: linear-gradient(to top, #fff, #b3d2ff, #3686fa, #4484fb, #679eff, #b3d2ff, #fff);
 }
 
 #our-special-features h2 {
@@ -615,12 +670,16 @@ body {
     padding-bottom: 1em;
 }
 
+#our-special-features span {
+    color: #1104ce;
+}
+
 .feature-card {
     border: none;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: #f6f5f5;
+    background-color: #fff;
     height: 11em;
 }
 
@@ -644,6 +703,10 @@ body {
     color: #6c757d;
     font-size: 0.95rem;
     padding-top: 1em;
+}
+
+#our-special-features .row {
+    margin-bottom: 6em;
 }
 
 /* Media Query for Mobile Devices */
@@ -670,7 +733,7 @@ body {
 }
 
 @media (min-width:768px) and (max-width:1024px) {
-    .feature-card{
+    .feature-card {
         height: 16em;
     }
 }
@@ -696,7 +759,7 @@ body {
     background-color: #f6f5f5;
     border-radius: 10px;
     padding: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgb(0 0 0 / 33%);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
     height: 14em;
@@ -745,6 +808,10 @@ body {
         padding: 2rem 1rem;
     }
 
+    #clients-words .row{
+        gap: 1.5em;
+    }
+
     .testimonial-card {
         padding: 1rem;
     }
@@ -773,8 +840,14 @@ body {
 }
 
 @media (min-width:768px) and (max-width:1024px) {
-    .testimonial-card{
-        height: 19em;
+    .testimonial-card {
+        height: 15em;
+    }
+}
+
+@media (max-width:992px) {
+    .testimonial-card {
+        background-color: #dedede87;
     }
 }
 
@@ -1069,7 +1142,7 @@ button:hover i {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .footer .row {
         flex-direction: column;
         text-align: center;
