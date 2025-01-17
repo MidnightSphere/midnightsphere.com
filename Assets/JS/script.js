@@ -1,99 +1,111 @@
-// Check if the user is directly accessing the home page
-const referrer = document.referrer; // Get the referrer URL
-const homeURL = window.location.origin + "/"; // The home page URL (adjust as needed)
+// Run this script when the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", function () {
+  initNavbar(); // Initialize navbar functionality
+  showSplashScreen(); // Show the splash screen if applicable
+  initObservers(); // Initialize IntersectionObservers for animations
+});
 
-if (referrer && referrer.startsWith(window.location.origin)) {
-  // If the referrer is from the same website, skip the splash screen
-  document.getElementById("splash-screen").style.display = "none";
-  document.getElementById("main-content").style.display = "block";
-} else {
-  window.onload = function () {
-    // Start fade-out animation and hide the splash screen
+// Show Splash Screen Logic
+function showSplashScreen() {
+  const splashScreen = document.getElementById("splash-screen");
+  const mainContent = document.getElementById("main-content");
+
+  if (!sessionStorage.getItem("splashShown")) {
     setTimeout(function () {
-      const splashScreen = document.getElementById("splash-screen");
-      splashScreen.style.opacity = "0"; // Start fade-out
+      if (splashScreen) splashScreen.style.opacity = "0";
       setTimeout(function () {
-        splashScreen.style.display = "none"; // Hide after fade-out
-        document.getElementById("main-content").style.display = "block";
-      }, 1000); // Match fade-out transition duration (1 second)
-    }, 2500); // Total duration of splash animations before fade-out
-  };
+        if (splashScreen) splashScreen.style.display = "none";
+        if (mainContent) mainContent.style.display = "block";
+        startStatAnimation(); // Start animations after the splash
+      }, 1000);
+    }, 2500);
+    sessionStorage.setItem("splashShown", "true");
+  } else {
+    if (splashScreen) splashScreen.style.display = "none";
+    if (mainContent) mainContent.style.display = "block";
+    startStatAnimation();
+  }
 }
 
-// Menu toggle functionality
-const menuToggle = document.getElementById("menuToggle");
-const navbarNav = document.getElementById("navbarNav");
-
-menuToggle.addEventListener("click", function () {
-  const isExpanded = navbarNav.classList.contains("show");
+// Navbar Initialization
+function initNavbar() {
+  const navbarToggle = document.querySelector(".navbar-toggler");
+  const navbarMenu = document.querySelector(".navbar-collapse");
   const menuIcon = document.querySelector(".menu-icon");
 
-  // Toggle menu icon
-  if (isExpanded) {
-    menuIcon.innerHTML = "&#9776;"; // Hamburger Icon
-  } else {
-    menuIcon.innerHTML = "&times;"; // Close Icon
-  }
-});
+  if (navbarToggle && navbarMenu && menuIcon) {
+    const bsCollapse = new bootstrap.Collapse(navbarMenu, {
+      toggle: false, // Disable automatic toggling
+    });
 
-// Reset menu icon when menu is hidden
-navbarNav.addEventListener("hidden.bs.collapse", function () {
-  const menuIcon = document.querySelector(".menu-icon");
-  menuIcon.innerHTML = "&#9776;"; // Reset to Hamburger Icon
-});
+    // Toggle the menu and update the icon
+    navbarToggle.addEventListener("click", function () {
+      if (navbarMenu.classList.contains("show")) {
+        bsCollapse.hide(); // Collapse the menu
+        menuIcon.innerHTML = "&#9776;"; // Hamburger Icon
+      } else {
+        bsCollapse.show(); // Expand the menu
+        menuIcon.innerHTML = "&times;"; // Close Icon
+      }
+    });
 
-// Automatically close the menu when a link is clicked
-document.querySelectorAll(".navbar-nav .nav-link").forEach((link) => {
-  link.addEventListener("click", () => {
-    const navbarCollapse = document.querySelector(".navbar-collapse");
-    if (navbarCollapse.classList.contains("show")) {
-      const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-        toggle: true,
-      });
-      bsCollapse.hide();
-    }
-  });
-});
+    // Listen for Bootstrap collapse events to reset the icon
+    navbarMenu.addEventListener("hidden.bs.collapse", function () {
+      menuIcon.innerHTML = "&#9776;"; // Reset to Hamburger Icon
+    });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const navbar = document.querySelector(".navbar");
-  const heroSection = document.querySelector(".hero-section");
+    navbarMenu.addEventListener("shown.bs.collapse", function () {
+      menuIcon.innerHTML = "&times;"; // Set to Close Icon
+    });
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navbar.classList.add("navbar-colored");
-          navbar.classList.remove("navbar-white");
-        } else {
-          navbar.classList.add("navbar-white");
-          navbar.classList.remove("navbar-colored");
+    // Automatically close the menu and reset the icon when a link is clicked
+    document.querySelectorAll(".navbar-nav .nav-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (navbarMenu.classList.contains("show")) {
+          bsCollapse.hide(); // Collapse the menu
+          menuIcon.innerHTML = "&#9776;"; // Reset to Hamburger Icon
         }
       });
-    },
-    { threshold: 0.1 } // Adjust the threshold as needed
-  );
+    });
+  }
+}
 
-  observer.observe(heroSection);
-});
+// Start Stat Animation
+function startStatAnimation() {
+  const statsSection = document.querySelector(".stats-section");
+  if (statsSection) {
+    const statsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateNumbers(); // Trigger animation
+            statsObserver.unobserve(entry.target); // Stop observing after animation
+          }
+        });
+      },
+      { threshold: 0.5 } // Trigger animation when 50% of the section is visible
+    );
 
+    statsObserver.observe(statsSection);
+  }
+}
 
-// Animate numbers in stats section
+// Stat Numbers Animation
 function animateNumbers() {
   const stats = document.querySelectorAll(".stat-number");
 
   stats.forEach((stat) => {
-    const target = +stat.getAttribute("data-target"); // Get the target number
+    const target = +stat.getAttribute("data-target");
     let current = 0;
-    const increment = target / 90; // Adjust the speed of animation
+    const increment = target / 90;
 
     const updateCount = () => {
+      current += increment;
       if (current < target) {
-        current += increment; // Increase number gradually
-        stat.innerText = Math.ceil(current); // Display the current number
-        setTimeout(updateCount, 30); // Adjust delay for smoother animation
+        stat.innerText = Math.ceil(current);
+        setTimeout(updateCount, 30);
       } else {
-        stat.innerText = target; // Ensure the final number is exact
+        stat.innerText = target; // End at the exact target value
       }
     };
 
@@ -101,54 +113,80 @@ function animateNumbers() {
   });
 }
 
-// Trigger animation when the stats section comes into view
-const statsObserver = new IntersectionObserver(
-  (entries) => {
+// Initialize Observers
+function initObservers() {
+  const heroSection = document.querySelector(".hero-section");
+  const navbar = document.querySelector(".navbar");
+
+  if (heroSection && navbar) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navbar.classList.add("navbar-colored");
+            navbar.classList.remove("navbar-white");
+          } else {
+            navbar.classList.add("navbar-white");
+            navbar.classList.remove("navbar-colored");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(heroSection);
+  }
+
+  startStatAnimation(); // Ensure stats animation observer is initialized
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  highlightNavOnScroll(); // Initialize highlight functionality
+});
+
+// Function to highlight navbar links based on section visibility
+function highlightNavOnScroll() {
+  const sections = [
+    { id: "home", link: ".home-link" },
+    { id: "stats-section", link: ".home-link" },
+    { id: "portfolio", link: ".home-link" },
+    { id: "our-special-features", link: ".home-link" },
+    { id: "clients-words", link: ".home-link" },
+    { id: "about", link: ".about-link" },
+    { id: "our-services", link: ".service-link" },
+    { id: "contact-us", link: ".contact-link" },
+    { id: "footer", link: ".contact-link" },
+  ];
+
+  const observerOptions = {
+    threshold: 0.4, // When 50% of the section is visible, trigger the callback
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
+      const sectionId = entry.target.id;
+      const link = sections.find((section) => section.id === sectionId)?.link;
+
       if (entry.isIntersecting) {
-        animateNumbers(); // Animate numbers
-        statsObserver.unobserve(entry.target); // Stop observing once animated
+        // Add 'active' class to navbar link when section is in view
+        if (link) {
+          document.querySelector(link).classList.add("active");
+        }
+      } else {
+        // Remove 'active' class when section is out of view
+        if (link) {
+          document.querySelector(link).classList.remove("active");
+        }
       }
     });
-  },
-  {
-    threshold: 0.5, // Trigger animation when 50% of the section is in view
-  }
-);
+  }, observerOptions);
 
-// Observe the stats section
-const statsSection = document.querySelector(".stats-section");
-if (statsSection) {
-  statsObserver.observe(statsSection);
-}
-
-// Highlight active navbar link based on the section in view
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".nav-link");
-
-function removeActiveClasses() {
-  navLinks.forEach((link) => link.classList.remove("active"));
-}
-
-function addActiveClass(sectionId) {
-  const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-  if (activeLink) activeLink.classList.add("active");
-}
-
-const sectionObserverOptions = {
-  root: null, // Use the viewport as the root
-  threshold: 0.6, // Trigger when 60% of the section is in view
-};
-
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      const sectionId = entry.target.id;
-      removeActiveClasses(); // Remove 'active' from all links
-      addActiveClass(sectionId); // Add 'active' to the link of the section in view
+  // Observe each section in the sections array
+  sections.forEach((section) => {
+    const sectionElement = document.getElementById(section.id);
+    if (sectionElement) {
+      observer.observe(sectionElement);
     }
   });
-}, sectionObserverOptions);
+}
 
-// Observe each section
-sections.forEach((section) => sectionObserver.observe(section));
