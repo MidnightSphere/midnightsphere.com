@@ -134,9 +134,9 @@ body {
 }
 
 .service-card {
-    background-color: #f6f5f5;
-    box-shadow: 0 4px 10px rgb(0 0 0 / 33%);
-    border: none;
+    background-color: #f6f6f6;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 40%);
+    border: solid 2px #009fff;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     padding: 1rem;
 }
