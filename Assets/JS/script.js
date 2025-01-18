@@ -263,3 +263,54 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("scroll", setActiveLink);
   window.addEventListener("load", setActiveLink);
 });
+
+// JS for EmailJS with Custom Alert
+function sendMail() {
+  let parms = {
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    msg: document.getElementById("msg").value,
+  };
+
+  emailjs
+    .send("service_i6qa9yh", "template_tu8d5ms", parms)
+    .then(() => {
+      showAlert("Email Sent Successfully!", "success"); // Custom alert for success
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      showAlert("Failed to send email. Please try again.", "error"); // Custom alert for error
+    });
+}
+
+function showAlert(message, type = "success") {
+  // Create overlay
+  const overlay = document.createElement("div");
+  overlay.className = "overlay";
+  document.body.appendChild(overlay);
+
+  // Create alert box
+  const alertBox = document.createElement("div");
+  alertBox.className = `custom-alert ${type}`; // Use template literals for class names
+  alertBox.textContent = message;
+
+  // Create OK button
+  const okButton = document.createElement("button");
+  okButton.className = "ok-btn";
+  okButton.textContent = "OK";
+
+  // Append OK button to the alert box
+  alertBox.appendChild(okButton);
+
+  // Append alert box to the body
+  document.body.appendChild(alertBox);
+
+  const form = document.getElementById("contactForm");
+
+  // Event listener for OK button to remove the alert box and overlay
+  okButton.addEventListener("click", () => {
+    alertBox.remove();
+    overlay.remove();
+    form.reset();
+  });
+}
