@@ -320,22 +320,19 @@ body {
 }
 
 .stat-card {
-    background: #f6f5f5;
+    background-color: #f7f7f7;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 40%);
+    /* border: solid 1px #009fff; */
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    /* Space between each stat */
     align-items: center;
     text-align: center;
     width: 80%;
-    /* Adjust width as per your needs */
     max-width: 900px;
-    /* Limit the maximum width */
     margin: 0 auto;
-    /* Center the card */
 }
 
 .stat-box {
@@ -491,9 +488,9 @@ body {
 }
 
 .service-card {
-    background-color: #f6f5f5;
-    box-shadow: 0 4px 10px rgb(0 0 0 / 33%);
-    border: none;
+    background-color: #f6f6f6;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 40%);
+    border: solid 2px #009fff;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     padding: 1rem;
 }
@@ -568,12 +565,6 @@ body {
     } */
 }
 
-@media (max-width:992px) {
-    .service-card {
-        background-color: #dedede87;
-    }
-}
-
 /* Portfolio Section */
 #portfolio {
     padding: 3rem 1rem;
@@ -591,12 +582,12 @@ body {
 }
 
 .portfolio-card {
-    border: none;
+    background-color: #f6f6f6;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 40%);
+    border: solid 2px #009fff;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgb(0 0 0 / 33%);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: #f6f5f5;
     height: 10em;
 }
 
@@ -656,11 +647,6 @@ body {
     }
 }
 
-@media (max-width:992px) {
-    .portfolio-card {
-        background-color: #dedede87;
-    }
-}
 
 /* Our Special Features Section */
 #our-special-features {
@@ -761,10 +747,11 @@ body {
 }
 
 .testimonial-card {
-    background-color: #f6f5f5;
+    background-color: #f6f6f6;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 40%);
+    border: solid 2px #009fff;
     border-radius: 10px;
     padding: 1.5rem;
-    box-shadow: 0 4px 10px rgb(0 0 0 / 33%);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
     height: 14em;
@@ -847,12 +834,6 @@ body {
 @media (min-width:768px) and (max-width:1024px) {
     .testimonial-card {
         height: 15em;
-    }
-}
-
-@media (max-width:992px) {
-    .testimonial-card {
-        background-color: #dedede87;
     }
 }
 
