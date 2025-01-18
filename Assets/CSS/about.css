@@ -133,8 +133,9 @@ body {
 
 .about-text {
   font-size: 1.2rem;
-  line-height: 1.8;
-  color: #555;
+  line-height: 1.75;
+  font-weight: 400;
+  color: #494949;
   padding: 15px;
   text-align: justify;
 }

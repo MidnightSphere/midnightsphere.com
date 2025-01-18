@@ -67,6 +67,18 @@ function initNavbar() {
         }
       });
     });
+
+    // Close the menu when clicking outside
+    document.addEventListener("click", function (event) {
+      if (
+        navbarMenu.classList.contains("show") && // Check if the menu is open
+        !navbarMenu.contains(event.target) && // Click is outside the menu
+        !navbarToggle.contains(event.target) // Click is not on the toggle button
+      ) {
+        bsCollapse.hide(); // Collapse the menu
+        menuIcon.innerHTML = "&#9776;"; // Reset to Hamburger Icon
+      }
+    });
   }
 }
 
