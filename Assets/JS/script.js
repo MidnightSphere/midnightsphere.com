@@ -129,6 +129,7 @@ function animateNumbers() {
 function initObservers() {
   const heroSection = document.querySelector(".hero-section");
   const navbar = document.querySelector(".navbar");
+  const navbarCollapse = document.querySelector(".navbar-collapse");
 
   if (heroSection && navbar) {
     const observer = new IntersectionObserver(
@@ -137,9 +138,21 @@ function initObservers() {
           if (entry.isIntersecting) {
             navbar.classList.add("navbar-colored");
             navbar.classList.remove("navbar-white");
+
+            // For collapsed navbar in view of hero section
+            if (navbarCollapse) {
+              navbarCollapse.classList.add("bg-colored");
+              navbarCollapse.classList.remove("bg-white");
+            }
           } else {
             navbar.classList.add("navbar-white");
             navbar.classList.remove("navbar-colored");
+
+            // For collapsed navbar when hero section is out of view
+            if (navbarCollapse) {
+              navbarCollapse.classList.add("bg-white");
+              navbarCollapse.classList.remove("bg-colored");
+            }
           }
         });
       },

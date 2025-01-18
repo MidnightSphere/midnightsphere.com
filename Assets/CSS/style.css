@@ -154,6 +154,14 @@ body {
         background-color: #ebf3fe !important;
     }
 
+    .navbar-collapse.bg-colored {
+        background-color: #ebf3fe !important;
+    }
+
+    .navbar-collapse.bg-white {
+        background-color: #ffffffcf !important;
+    }
+
     .navbar-nav .nav-link.active {
         text-decoration: underline;
     }
