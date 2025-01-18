@@ -141,52 +141,65 @@ function initObservers() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  highlightNavOnScroll(); // Initialize highlight functionality
-});
+  const navbarLinks = document.querySelectorAll(".nav-link"); // All navbar links
+  const sections = document.querySelectorAll("section"); // All sections
+  const offset = document.querySelector("nav").offsetHeight; // Navbar height
 
-// Function to highlight navbar links based on section visibility
-function highlightNavOnScroll() {
-  const sections = [
-    { id: "home", link: ".home-link" },
-    { id: "stats-section", link: ".home-link" },
-    { id: "portfolio", link: ".home-link" },
-    { id: "our-special-features", link: ".home-link" },
-    { id: "clients-words", link: ".home-link" },
-    { id: "about", link: ".about-link" },
-    { id: "our-services", link: ".service-link" },
-    { id: "contact-us", link: ".contact-link" },
-    { id: "footer", link: ".contact-link" },
-  ];
+  // Function to highlight active link based on scroll position
+  function setActiveLink() {
+    const viewportHeight = window.innerHeight;
 
-  const observerOptions = {
-    threshold: 0.4, // When 50% of the section is visible, trigger the callback
-  };
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      const link = document.querySelector(`.nav-link[href="#${section.id}"]`);
 
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      const sectionId = entry.target.id;
-      const link = sections.find((section) => section.id === sectionId)?.link;
-
-      if (entry.isIntersecting) {
-        // Add 'active' class to navbar link when section is in view
+      // Check if section is in view using top and bottom offsets
+      if (
+        rect.top <= offset &&
+        rect.bottom >= offset + viewportHeight * 0.5
+      ) {
         if (link) {
-          document.querySelector(link).classList.add("active");
+          link.classList.add("active");
         }
       } else {
-        // Remove 'active' class when section is out of view
         if (link) {
-          document.querySelector(link).classList.remove("active");
+          link.classList.remove("active");
         }
       }
     });
-  }, observerOptions);
 
-  // Observe each section in the sections array
-  sections.forEach((section) => {
-    const sectionElement = document.getElementById(section.id);
-    if (sectionElement) {
-      observer.observe(sectionElement);
+    // Special handling for "Home" link
+    const homeLink = document.querySelector(".home-link");
+    const homeSections = ["hero-section", "stats-section", "portfolio", "our-special-features", "clients-words"];
+    const isHomeActive = homeSections.some((id) => {
+      const homeSection = document.getElementById(id);
+      const rect = homeSection.getBoundingClientRect();
+      return rect.top <= offset && rect.bottom >= offset;
+    });
+
+    if (isHomeActive) {
+      homeLink.classList.add("active");
+    } else {
+      homeLink.classList.remove("active");
     }
-  });
-}
+  }
 
+  // Smooth scroll on clicking a nav link
+  navbarLinks.forEach((link) => {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      const targetId = this.getAttribute("href").slice(1);
+      const targetSection = document.getElementById(targetId);
+      const scrollToPosition = targetSection.offsetTop - offset;
+
+      window.scrollTo({
+        top: scrollToPosition,
+        behavior: "smooth",
+      });
+    });
+  });
+
+  // Run on scroll and on page load
+  window.addEventListener("scroll", setActiveLink);
+  window.addEventListener("load", setActiveLink);
+});
