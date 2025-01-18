@@ -140,23 +140,40 @@ function initObservers() {
   startStatAnimation(); // Ensure stats animation observer is initialized
 }
 
+// Scroll-Based Active Link Logic
 document.addEventListener("DOMContentLoaded", function () {
   const navbarLinks = document.querySelectorAll(".nav-link"); // All navbar links
   const sections = document.querySelectorAll("section"); // All sections
   const offset = document.querySelector("nav").offsetHeight; // Navbar height
 
+  // Special sections that define the "Home" link area
+  const homeSections = [
+    "hero-section",
+    "stats-section",
+    "portfolio",
+    "our-special-features",
+    "clients-words",
+  ];
+
+  // ID of sections that should activate the "Contact Us" link
+  const contactSections = ["contact-us", "footer"];
+
   // Function to highlight active link based on scroll position
   function setActiveLink() {
-    const viewportHeight = window.innerHeight;
+    const scrollPosition = window.scrollY + offset + 1; // Current scroll position + offset
+
+    let isHomeActive = false; // Flag for home link
+    let isContactActive = false; // Flag for "Contact Us" link
 
     sections.forEach((section) => {
-      const rect = section.getBoundingClientRect();
+      const sectionTop = section.offsetTop; // Section's top position
+      const sectionHeight = section.offsetHeight; // Section's height
       const link = document.querySelector(`.nav-link[href="#${section.id}"]`);
 
-      // Check if section is in view using top and bottom offsets
+      // Check if the current scroll position is within the section's boundaries
       if (
-        rect.top <= offset &&
-        rect.bottom >= offset + viewportHeight * 0.5
+        scrollPosition >= sectionTop &&
+        scrollPosition < sectionTop + sectionHeight
       ) {
         if (link) {
           link.classList.add("active");
@@ -166,21 +183,46 @@ document.addEventListener("DOMContentLoaded", function () {
           link.classList.remove("active");
         }
       }
+
+      // Check if the section belongs to "Home"
+      if (homeSections.includes(section.id)) {
+        if (
+          scrollPosition >= sectionTop &&
+          scrollPosition < sectionTop + sectionHeight
+        ) {
+          isHomeActive = true;
+        }
+      }
+
+      // Check if the section belongs to "Contact Us"
+      if (contactSections.includes(section.id)) {
+        if (
+          scrollPosition >= sectionTop &&
+          scrollPosition < sectionTop + sectionHeight
+        ) {
+          isContactActive = true;
+        }
+      }
     });
 
     // Special handling for "Home" link
     const homeLink = document.querySelector(".home-link");
-    const homeSections = ["hero-section", "stats-section", "portfolio", "our-special-features", "clients-words"];
-    const isHomeActive = homeSections.some((id) => {
-      const homeSection = document.getElementById(id);
-      const rect = homeSection.getBoundingClientRect();
-      return rect.top <= offset && rect.bottom >= offset;
-    });
+    if (homeLink) {
+      if (isHomeActive) {
+        homeLink.classList.add("active");
+      } else {
+        homeLink.classList.remove("active");
+      }
+    }
 
-    if (isHomeActive) {
-      homeLink.classList.add("active");
-    } else {
-      homeLink.classList.remove("active");
+    // Special handling for "Contact Us" link
+    const contactLink = document.querySelector(".contact-link");
+    if (contactLink) {
+      if (isContactActive) {
+        contactLink.classList.add("active");
+      } else {
+        contactLink.classList.remove("active");
+      }
     }
   }
 
@@ -190,12 +232,18 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       const targetId = this.getAttribute("href").slice(1);
       const targetSection = document.getElementById(targetId);
-      const scrollToPosition = targetSection.offsetTop - offset;
+
+      // Scroll to the section while accounting for navbar offset
+      const scrollToPosition = targetSection.offsetTop - offset + 80;
 
       window.scrollTo({
         top: scrollToPosition,
         behavior: "smooth",
       });
+
+      // Highlight the clicked link immediately
+      navbarLinks.forEach((link) => link.classList.remove("active"));
+      this.classList.add("active");
     });
   });
 

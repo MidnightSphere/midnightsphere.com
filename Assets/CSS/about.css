@@ -42,7 +42,6 @@ body {
 
 .navbar-nav .nav-link.active {
   color: #1404fa !important;
-  text-decoration: underline;
 }
 
 /* .menu-icon {
@@ -71,6 +70,10 @@ body {
 }
 
 @media (max-width: 991.98px) {
+
+  .navbar-nav .nav-link.active {
+    text-decoration: underline;
+  }
 
   .navbar-brand,
   .navbar-nav {
@@ -190,10 +193,10 @@ body {
 
 @media (max-width: 576px) {
 
-  #vision-mission .row{
+  #vision-mission .row {
     gap: 2em;
   }
-  
+
   .about-image img {
     width: 50%;
     margin-left: 4em;
