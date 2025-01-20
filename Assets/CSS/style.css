@@ -1066,6 +1066,11 @@ button:hover i {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
+    .contact-us {
+        padding: 60px 20px;
+    }
+    
     .form-row {
         flex-direction: column;
         gap: 0;
