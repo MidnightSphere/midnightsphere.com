@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "hero-section",
     "stats-section",
     "portfolio",
-    "our-special-features",
+    "faq",
     "clients-words",
   ];
 
@@ -275,6 +275,19 @@ document.addEventListener("DOMContentLoaded", function () {
   // Run on scroll and on page load
   window.addEventListener("scroll", setActiveLink);
   window.addEventListener("load", setActiveLink);
+});
+
+// FAQ Toggle Functionality
+document.querySelectorAll(".faq-item").forEach((item) => {
+  const question = item.querySelector(".faq-question");
+  question.addEventListener("click", () => {
+    document.querySelectorAll(".faq-item").forEach((otherItem) => {
+      if (otherItem !== item) {
+        otherItem.classList.remove("active");
+      }
+    });
+    item.classList.toggle("active");
+  });
 });
 
 // JS for EmailJS with Custom Alert

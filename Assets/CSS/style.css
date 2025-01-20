@@ -380,7 +380,6 @@ body {
 .stats-section h1 span,
 .about-us span,
 #our-services span,
-#portfolio span,
 #clients-words span,
 #contact-us span {
     color: #1404fa;
@@ -464,7 +463,7 @@ body {
 .about-text {
     font-size: 1.2rem;
     line-height: 1.75;
-    font-weight: 400;
+    font-weight: 600;
     color: #494949;
     padding: 15px;
     text-align: justify;
@@ -596,23 +595,29 @@ body {
 /* Portfolio Section */
 #portfolio {
     padding: 3rem 1rem;
+    background-image: linear-gradient(to top, #fff, #b3d2ff, #3686fa, #4484fb, #679eff, #b3d2ff, #fff);
 }
+
+#portfolio span {
+    color: #1104ce;
+}
+
 
 #portfolio h2 {
     font-size: 2.5rem;
     font-weight: bold;
-    /* padding-bottom: 0.5em; */
+    padding-top: 1em;
 }
 
 #portfolio p {
-    color: #666;
+    color: #3b3b3b;
     font-size: 1rem;
 }
 
 .portfolio-card {
-    background-color: #f6f6f6;
+    background-color: #fff;
     box-shadow: 0 4px 10px rgb(0 0 0 / 40%);
-    border: solid 2px #009fff;
+    border: solid 0.5px black;
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -646,6 +651,11 @@ body {
     padding-top: 1em;
 }
 
+
+#portfolio .row {
+    margin-bottom: 6em;
+}
+
 /* Media Queries */
 @media (max-width: 576px) {
     #portfolio {
@@ -675,97 +685,127 @@ body {
     }
 }
 
-
-/* Our Special Features Section */
-#our-special-features {
-    padding: 2.5rem 1rem;
-    background-image: linear-gradient(to top, #fff, #b3d2ff, #3686fa, #4484fb, #679eff, #b3d2ff, #fff);
+.faq-container {
+    padding: 50px 20px;
+    margin-top: 2em;
 }
 
-#our-special-features h2 {
-    font-size: 2.5rem;
+.faq-title {
+    font-size: 2rem;
     font-weight: bold;
-    padding-top: 2em;
-    padding-bottom: 1em;
-}
-
-#our-special-features span {
-    color: #1104ce;
-}
-
-.feature-card {
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: #fff;
-    height: 11em;
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-.feature-icon {
-    font-size: 2.5rem;
     color: #007bff;
+    text-align: center;
 }
 
-.feature-card .card-title {
-    font-weight: bold;
-    margin-top: 10px;
+.faq-description {
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+@media (min-width: 992px) {
+    .faq-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
+        height: 100%;
+        margin-top: -5em;
+        /* Ensure full height consistency */
+    }
+
+    .faq-container {
+        display: flex;
+        align-items: stretch;
+        /* Align items to ensure no shifting */
+    }
+
+    .faq-left-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 400px;
+        /* Ensures left content is steady */
+    }
+}
+
+.faq-card {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.faq-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-question {
     font-size: 1.2rem;
+    font-weight: bold;
+    color: #007bff;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.feature-card .card-text {
-    color: #6c757d;
-    font-size: 0.95rem;
-    padding-top: 1em;
+.faq-question:hover {
+    color: #0056b3;
 }
 
-#our-special-features .row {
-    margin-bottom: 6em;
+.faq-question::after {
+    content: "▼";
+    font-size: 1rem;
+    transition: transform 0.3s ease;
 }
 
-/* Media Query for Mobile Devices */
-@media (max-width: 576px) {
-    #our-special-features {
-        padding: 1.5rem 1rem;
-    }
-
-    .feature-card {
-        padding: 1rem;
-    }
-
-    .feature-icon {
-        font-size: 2rem;
-    }
-
-    .feature-card .card-title {
-        font-size: 1rem;
-    }
-
-    .feature-card .card-text {
-        font-size: 0.85rem;
-    }
+.faq-item.active .faq-question::after {
+    transform: rotate(180deg);
 }
 
-@media (min-width:768px) and (max-width:1024px) {
-    .feature-card {
-        height: 16em;
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    color: #333;
+    font-size: 1rem;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+    padding-top: 10px;
+}
+
+@media (min-width: 992px) {
+
+    .faq-title,
+    .faq-description {
+        text-align: left;
+    }
+
+    .faq-description {
+        margin-bottom: 10px;
     }
 }
 
 /* Client's Words Section */
 #clients-words {
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
 }
 
 #clients-words h2 {
     font-size: 2.5rem;
     font-weight: bold;
-    padding-top: 1em;
+    /* padding-top: 1em; */
     /* padding-bottom: 0.1em; */
 }
 
