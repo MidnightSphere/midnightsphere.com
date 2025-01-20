@@ -685,117 +685,6 @@ body {
     }
 }
 
-.faq-container {
-    padding: 50px 20px;
-    margin-top: 2em;
-}
-
-.faq-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #007bff;
-    text-align: center;
-}
-
-.faq-description {
-    font-size: 1rem;
-    color: #333;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-@media (min-width: 992px) {
-    .faq-left {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: left;
-        height: 100%;
-        margin-top: -5em;
-        /* Ensure full height consistency */
-    }
-
-    .faq-container {
-        display: flex;
-        align-items: stretch;
-        /* Align items to ensure no shifting */
-    }
-
-    .faq-left-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-height: 400px;
-        /* Ensures left content is steady */
-    }
-}
-
-.faq-card {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
-.faq-item {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 15px 0;
-    transition: all 0.3s ease-in-out;
-}
-
-.faq-item:last-child {
-    border-bottom: none;
-}
-
-.faq-question {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #007bff;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.faq-question:hover {
-    color: #0056b3;
-}
-
-.faq-question::after {
-    content: "▼";
-    font-size: 1rem;
-    transition: transform 0.3s ease;
-}
-
-.faq-item.active .faq-question::after {
-    transform: rotate(180deg);
-}
-
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-    color: #333;
-    font-size: 1rem;
-}
-
-.faq-item.active .faq-answer {
-    max-height: 200px;
-    padding-top: 10px;
-}
-
-@media (min-width: 992px) {
-
-    .faq-title,
-    .faq-description {
-        text-align: left;
-    }
-
-    .faq-description {
-        margin-bottom: 10px;
-    }
-}
 
 /* Client's Words Section */
 #clients-words {
@@ -905,16 +794,129 @@ body {
     }
 }
 
+.faq-container {
+    padding: 50px 20px;
+    margin-top: 3em;
+}
+
+.faq-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff;
+    text-align: center;
+}
+
+.faq-description {
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+@media (min-width: 992px) {
+    .faq-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
+        height: 100%;
+        margin-top: -5em;
+        /* Ensure full height consistency */
+    }
+
+    .faq-container {
+        display: flex;
+        align-items: stretch;
+        /* Align items to ensure no shifting */
+    }
+
+    .faq-left-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 400px;
+        /* Ensures left content is steady */
+    }
+}
+
+.faq-card {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.faq-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-question {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #007bff;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question:hover {
+    color: #0056b3;
+}
+
+.faq-question::after {
+    content: "▼";
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-question::after {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    color: #333;
+    font-size: 1rem;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+    padding-top: 10px;
+}
+
+@media (min-width: 992px) {
+
+    .faq-title,
+    .faq-description {
+        text-align: left;
+    }
+
+    .faq-description {
+        margin-bottom: 10px;
+    }
+}
+
+
 /* Contact Us Section */
 .contact-us {
-    padding: 50px 20px;
+    padding: 40px 20px;
     text-align: center;
 }
 
 .section-title {
     font-size: 2.5rem;
     font-weight: bold;
-    padding-top: 1em;
+    /* padding-top: 1em; */
     margin-bottom: 10px;
     color: #333;
 }
