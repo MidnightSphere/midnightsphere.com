@@ -249,6 +249,7 @@ body {
     font-weight: bold;
     /* text-transform: uppercase; */
     transition: transform 0.3s ease;
+    width: 9em;
 }
 
 .hero-button:hover {
@@ -339,6 +340,12 @@ body {
         max-width: 70%;
         margin-left: 7em;
     }
+}
+
+@media (min-width:1024px) {
+    .hero-section .hero-content .my-5{
+        margin-right: 24em;
+        }
 }
 
 .stats-section {
@@ -624,15 +631,6 @@ body {
     height: 18em;
 }
 
-.portfolio-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
-.portfolio-card img {
-    border-bottom: 5px solid #007bff;
-}
-
 .portfolio-card .card-body {
     padding: 1rem;
     text-align: center;
@@ -657,6 +655,75 @@ body {
 }
 
 /* Media Queries */
+
+@media (min-width:1024px) {
+    .portfolio-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Hover Effect */
+    .portfolio-card:hover .portfolio-image {
+        transform: scale(1.1);
+    }
+
+    .portfolio-hover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 56%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .portfolio-card:hover .portfolio-hover {
+        opacity: 1;
+    }
+
+
+    .portfolio-card img {
+        border-bottom: 5px solid #007bff;
+    }
+
+    .link-wrapper {
+        display: block;
+      }
+
+    /* View Button */
+    .view-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: opacity 0.3s ease, background-color 0.3s ease;
+        opacity: 0;
+        pointer-events: none;
+        /* Prevent interaction when not visible */
+    }
+
+    .portfolio-card:hover .view-button {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .view-button:hover {
+        background-color: #0056b3;
+    }
+
+}
+
 @media (max-width: 576px) {
     #portfolio {
         padding: 2rem 1rem;
@@ -685,11 +752,11 @@ body {
     }
 } */
 
- @media (max-width:1024px) {
+@media (max-width:1024px) {
     .portfolio-card {
         height: 15em;
     }
-} 
+}
 
 
 /* Client's Words Section */
@@ -1076,7 +1143,7 @@ button:hover i {
     .contact-us {
         padding: 90px 20px;
     }
-    
+
     .form-row {
         flex-direction: column;
         gap: 0;

@@ -340,3 +340,54 @@ function showAlert(message, type = "success") {
     form.reset();
   });
 }
+
+function toggleButtonVisibility() {
+  const buttons = document.querySelectorAll(".view-button");
+
+  // Check screen width
+  if (window.innerWidth >= 1024) {
+    buttons.forEach((button) => {
+      button.style.display = "block"; // Show buttons for larger screens
+    });
+  } else {
+    buttons.forEach((button) => {
+      button.style.display = "none"; // Hide buttons for smaller screens
+    });
+  }
+}
+
+// Call the function on page load and when resizing the window
+window.addEventListener("load", toggleButtonVisibility);
+window.addEventListener("resize", toggleButtonVisibility);
+
+function addLinkToImage() {
+  const portfolioCards = document.querySelectorAll(".portfolio-card");
+
+  portfolioCards.forEach((card) => {
+    const image = card.querySelector("img");
+    const link = card.querySelector("a.view-button");
+
+    if (window.innerWidth <= 1024) {
+      // Wrap the image with the link
+      if (!image.parentElement.classList.contains("link-wrapper")) {
+        const wrapper = document.createElement("a");
+        wrapper.href = link.href;
+        wrapper.className = "link-wrapper";
+        wrapper.target = "_blank"; // Opens in a new tab
+        wrapper.appendChild(image.cloneNode(true));
+        image.replaceWith(wrapper);
+      }
+    } else {
+      // Remove link wrapping for larger screens
+      const wrapper = card.querySelector(".link-wrapper");
+      if (wrapper) {
+        const originalImage = wrapper.querySelector("img");
+        wrapper.replaceWith(originalImage);
+      }
+    }
+  });
+}
+
+// Call the function on page load and when resizing the window
+window.addEventListener("load", addLinkToImage);
+window.addEventListener("resize", addLinkToImage);
