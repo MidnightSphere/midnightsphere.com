@@ -494,6 +494,15 @@ body {
     transform: scale(1.05);
 }
 
+.read-more-btn i, #servicebtn i {
+    margin-left: 0.3rem;
+    font-size: 1.1rem;
+    transition: 0.3s;
+}
+
+.read-more-btn:hover i, #servicebtn i {
+    transform: translateX(5px);
+}
 
 @media (max-width:992px) {
     .about-image img {
