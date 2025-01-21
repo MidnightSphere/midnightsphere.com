@@ -621,7 +621,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 10em;
+    height: 18em;
 }
 
 .portfolio-card:hover {
@@ -679,11 +679,17 @@ body {
     }
 }
 
-@media (min-width:768px) and (max-width:1024px) {
+/* @media (min-width:768px) and (max-width:1024px) {
     .portfolio-card {
-        height: 12em;
+        height: 15em;
     }
-}
+} */
+
+ @media (max-width:1024px) {
+    .portfolio-card {
+        height: 15em;
+    }
+} 
 
 
 /* Client's Words Section */
@@ -909,7 +915,7 @@ body {
 
 /* Contact Us Section */
 .contact-us {
-    padding: 40px 20px;
+    padding: 50px 20px;
     text-align: center;
 }
 
@@ -1068,7 +1074,7 @@ button:hover i {
 @media (max-width: 768px) {
 
     .contact-us {
-        padding: 60px 20px;
+        padding: 90px 20px;
     }
     
     .form-row {
