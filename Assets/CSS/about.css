@@ -58,7 +58,7 @@ body {
 
   .navbar .ms-2 {
     margin-left: -45px !important;
-    width: 10em !important;
+    /* width: 10em !important; */
   }
 }
 
