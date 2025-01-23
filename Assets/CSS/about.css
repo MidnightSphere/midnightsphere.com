@@ -70,6 +70,15 @@ body {
     width: 100%;
     z-index: 1000;
   }
+
+  .ms-1{
+    max-width: 5.5em;
+}
+
+.ms-2{
+    max-width: 13em;
+}
+
 }
 
 @media (max-width: 991.98px) {

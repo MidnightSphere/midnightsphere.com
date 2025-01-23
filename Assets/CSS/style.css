@@ -142,6 +142,19 @@ body {
         height: 3.5em;
         z-index: 1000;
     }
+
+    .navbar .navbar-brand {
+        gap: 0.5em;
+    }
+
+    .ms-1{
+        max-width: 5.5em;
+    }
+
+    .ms-2{
+        max-width: 13em;
+    }
+
 }
 
 @media (max-width: 991.98px) {
@@ -255,6 +268,10 @@ body {
 .hero-button:hover {
     background-color: #1A44CC;
     transform: scale(1.1);
+}
+
+.arrow {
+    font-size: 1.5em;
 }
 
 .hero-image img {
