@@ -21,6 +21,7 @@ function showSplashScreen() {
         if (mainContent) mainContent.style.display = "block";
 
         // Start animations after splash screen
+        initNavbar();
         startStatAnimation();
         setTimeout(() => {
           initScrollReveal(); // Initialize ScrollReveal animations after the splash screen
