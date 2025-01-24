@@ -34,13 +34,13 @@ document.querySelectorAll(".navbar-nav .nav-link").forEach((link) => {
 });
 
 // ScrollReveal animation initialization
-  const srtop = ScrollReveal({
-    origin: "top",
-    distance: "80px",
-    duration: 1000,
-    reset: false,
-  });
+  // const srtop = ScrollReveal({
+  //   origin: "top",
+  //   distance: "80px",
+  //   duration: 1000,
+  //   reset: false,
+  // });
 
-  srtop.reveal("#our-services", { delay: 400 });
-  srtop.reveal(".row2", { delay: 600 });
+  // srtop.reveal("#our-services", { delay: 400 });
+  // srtop.reveal(".row2", { delay: 600 });
 

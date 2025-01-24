@@ -32,13 +32,13 @@ document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
 });
 
 // ScrollReveal animation initialization
-const srtop = ScrollReveal({
-  origin: "top",
-  distance: "80px",
-  duration: 1000,
-  reset: false,
-});
+// const srtop = ScrollReveal({
+//   origin: "top",
+//   distance: "80px",
+//   duration: 1000,
+//   reset: false,
+// });
 
-srtop.reveal("#about", { delay: 400 });
-srtop.reveal("#vision-mission", { delay: 400 });
-srtop.reveal("#our-special-features", { delay: 400 });
+// srtop.reveal("#about", { delay: 400 });
+// srtop.reveal("#vision-mission", { delay: 400 });
+// srtop.reveal("#our-special-features", { delay: 400 });

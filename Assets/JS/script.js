@@ -3,9 +3,10 @@ document.addEventListener("DOMContentLoaded", function () {
   initNavbar(); // Initialize navbar functionality
   showSplashScreen(); // Show the splash screen if applicable
   initObservers(); // Initialize IntersectionObservers for animations
-  if (sessionStorage.getItem("splashShown")) {
-    initScrollReveal(); // Run immediately if splash is skipped
-  }
+
+  // if (sessionStorage.getItem("splashShown")) {
+  //   initScrollReveal(); // Run immediately if splash is skipped
+  // }
 });
 
 // Show Splash Screen Logic
@@ -14,63 +15,68 @@ function showSplashScreen() {
   const mainContent = document.getElementById("main-content");
 
   if (!sessionStorage.getItem("splashShown")) {
+    // Show splash screen for the first visit
     setTimeout(function () {
-      if (splashScreen) splashScreen.style.opacity = "0";
+      if (splashScreen) splashScreen.style.opacity = "0"; // Fade out
       setTimeout(function () {
-        if (splashScreen) splashScreen.style.display = "none";
-        if (mainContent) mainContent.style.display = "block";
+        if (splashScreen) splashScreen.style.display = "none"; // Hide splash
+        if (mainContent) mainContent.style.display = "block"; // Show content
 
-        // Start animations after splash screen
-        initNavbar();
-        startStatAnimation();
+        // Initialize animations after ensuring content is visible
         setTimeout(() => {
-          initScrollReveal(); // Initialize ScrollReveal animations after the splash screen
-        }, 100); // Slight delay after showing main content
-      }, 1000); // Splash screen fade-out animation duration
-    }, 2500); // Splash screen delay
+          initScrollReveal(); // ScrollReveal animations
+          startStatAnimation(); // Start statistics animation
+        }, 100); // Ensure all elements are visible in the DOM
+      }, 1000); // Splash fade-out duration
+    }, 2500); // Splash screen delay duration
     sessionStorage.setItem("splashShown", "true");
   } else {
-    // If splash screen was already shown, proceed without delay
+    // Skip splash screen for subsequent visits
     if (splashScreen) splashScreen.style.display = "none";
     if (mainContent) mainContent.style.display = "block";
 
-    // Start animations immediately if splash screen was already shown
+    // Start animations immediately for returning visitors
+    // initScrollReveal();
     startStatAnimation();
-    initScrollReveal(); // Initialize ScrollReveal animations without delay
   }
 }
 
 // ScrollReveal animation initialization
-function initScrollReveal() {
-  ScrollReveal().reveal(".hero-content", {
-    delay: 50, // No delay for hero section when coming from other pages
-    duration: 1000,
-    origin: "left",
-    distance: "50px",
-  });
+// function initScrollReveal() {
+//   console.log("Initializing ScrollReveal animations"); // Debugging
 
-  ScrollReveal().reveal(".hero-image", {
-    delay: 50, // No delay for hero section when coming from other pages
-    duration: 1000,
-    origin: "right",
-    distance: "50px",
-  });
+//   // Hero Section (No delay when returning, delay when splash is shown)
+//   ScrollReveal().reveal(".hero-content", {
+//     delay: sessionStorage.getItem("splashShown") ? 0 : 0, // Splash screen delay or no delay
+//     duration: 1000,
+//     origin: "left",
+//     distance: "50px",
+//     reset: false, // Do not reset animations on scroll
+//   });
 
-  const srtop = ScrollReveal({
-    origin: "top",
-    distance: "80px",
-    duration: 1000,
-    reset: false,
-  });
+//   ScrollReveal().reveal(".hero-image", {
+//     delay: sessionStorage.getItem("splashShown") ? 0 : 0, // Splash screen delay or no delay
+//     duration: 1000,
+//     origin: "right",
+//     distance: "50px",
+//     reset: false,
+//   });
 
-  srtop.reveal(".about-us", { delay: 400 });
-  srtop.reveal("#our-services", { delay: 400 });
-  srtop.reveal("#portfolio", { delay: 400 });
-  srtop.reveal("#clients-words", { delay: 400 });
-  srtop.reveal("#faq", { delay: 400 });
-  srtop.reveal("#contact-us", { delay: 400 });
+//   // Other sections
+//   const srtop = ScrollReveal({
+//     origin: "top",
+//     distance: "80px",
+//     duration: 1000,
+//     reset: false,
+//   });
 
-}
+//   srtop.reveal(".about-us", { delay: 400 });
+//   srtop.reveal("#our-services", { delay: 400 });
+//   srtop.reveal("#portfolio", { delay: 400 });
+//   srtop.reveal("#clients-words", { delay: 400 });
+//   srtop.reveal("#faq", { delay: 400 });
+//   srtop.reveal("#contact-us", { delay: 400 });
+// }
 
 // Navbar Initialization
 function initNavbar() {
