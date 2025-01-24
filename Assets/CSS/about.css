@@ -57,8 +57,7 @@ body {
   }
 
   .navbar .ms-2 {
-    margin-left: -50px !important;
-    /* width: 10em !important; */
+    margin-left: -40px !important;
   }
 }
 
@@ -192,8 +191,8 @@ body {
 
 @media (max-width:992px) {
   .about-image img {
-    width: 70%;
-    margin-left: 1.5em;
+    width: 45%;
+    margin-left: 7.5em;
   }
 
   .about-us-title {
@@ -206,7 +205,19 @@ body {
 
 }
 
+@media (min-width:992px) and (max-width:1200px) {
+  .about-image img {
+    width: 60%;
+    margin-left: 1.5em;
+  }
+}
+
 @media (max-width: 576px) {
+
+  .about-image img {
+    width: 70%;
+    margin-left: 1.5em;
+  }
 
   #vision-mission .row {
     gap: 2em;
@@ -301,6 +312,11 @@ body {
 }
 
 @media (min-width:768px) and (max-width:1024px) {
+  
+  .card{
+    height: 13.5em;
+  }
+  
   .feature-card {
     height: 16em;
   }
