@@ -3,10 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
   initNavbar(); // Initialize navbar functionality
   showSplashScreen(); // Show the splash screen if applicable
   initObservers(); // Initialize IntersectionObservers for animations
-
-  // if (sessionStorage.getItem("splashShown")) {
-  //   initScrollReveal(); // Run immediately if splash is skipped
-  // }
 });
 
 // Show Splash Screen Logic
@@ -15,68 +11,62 @@ function showSplashScreen() {
   const mainContent = document.getElementById("main-content");
 
   if (!sessionStorage.getItem("splashShown")) {
-    // Show splash screen for the first visit
     setTimeout(function () {
-      if (splashScreen) splashScreen.style.opacity = "0"; // Fade out
+      if (splashScreen) splashScreen.style.opacity = "0";
       setTimeout(function () {
-        if (splashScreen) splashScreen.style.display = "none"; // Hide splash
-        if (mainContent) mainContent.style.display = "block"; // Show content
+        if (splashScreen) splashScreen.style.display = "none";
+        if (mainContent) mainContent.style.display = "block";
 
-        // Initialize animations after ensuring content is visible
+        // Start animations after splash screen
+        startStatAnimation();
         setTimeout(() => {
-          initScrollReveal(); // ScrollReveal animations
-          startStatAnimation(); // Start statistics animation
-        }, 100); // Ensure all elements are visible in the DOM
-      }, 1000); // Splash fade-out duration
-    }, 2500); // Splash screen delay duration
+          initScrollReveal(); // Initialize ScrollReveal animations after the splash screen
+        }, 100); // Slight delay after showing main content
+      }, 1000); // Splash screen fade-out animation duration
+    }, 2500); // Splash screen delay
     sessionStorage.setItem("splashShown", "true");
   } else {
-    // Skip splash screen for subsequent visits
+    // If splash screen was already shown, proceed without delay
     if (splashScreen) splashScreen.style.display = "none";
     if (mainContent) mainContent.style.display = "block";
 
-    // Start animations immediately for returning visitors
-    // initScrollReveal();
+    // Start animations immediately if splash screen was already shown
     startStatAnimation();
+    initScrollReveal(); // Initialize ScrollReveal animations without delay
   }
 }
 
 // ScrollReveal animation initialization
-// function initScrollReveal() {
-//   console.log("Initializing ScrollReveal animations"); // Debugging
+function initScrollReveal() {
+  const sr = ScrollReveal({
+    origin: "top",
+    distance: "80px",
+    duration: 1000,
+    reset: false,
+  });
 
-//   // Hero Section (No delay when returning, delay when splash is shown)
-//   ScrollReveal().reveal(".hero-content", {
-//     delay: sessionStorage.getItem("splashShown") ? 0 : 0, // Splash screen delay or no delay
-//     duration: 1000,
-//     origin: "left",
-//     distance: "50px",
-//     reset: false, // Do not reset animations on scroll
-//   });
+  sr.reveal(".about-us-title", { delay: 200 });
+  sr.reveal(".about-us-content", { delay: 400 });
+  sr.reveal(".read-more-btn", { delay: 200 });
+  sr.reveal("#our-services .mb-4", { delay: 600 });
+  sr.reveal(".service-card", { delay: 600 });
+  sr.reveal("#servicebtn", { delay: 400 });
+  sr.reveal("#portfolio .mb-4", { delay: 200 });
+  sr.reveal("#portfolio .mb-5", { delay: 200 });
+  sr.reveal(".portfolio-card", { delay: 200 });
+  sr.reveal("#clients-words .mb-4", { delay: 200 });
+  sr.reveal("#clients-words .mb-5", { delay: 200 });
+  sr.reveal(".testimonial-card", { delay: 200 });
+  sr.reveal("#faq", { delay: 400 });
+  sr.reveal(".contact-us", { delay: 400 });
 
-//   ScrollReveal().reveal(".hero-image", {
-//     delay: sessionStorage.getItem("splashShown") ? 0 : 0, // Splash screen delay or no delay
-//     duration: 1000,
-//     origin: "right",
-//     distance: "50px",
-//     reset: false,
-//   });
-
-//   // Other sections
-//   const srtop = ScrollReveal({
-//     origin: "top",
-//     distance: "80px",
-//     duration: 1000,
-//     reset: false,
-//   });
-
-//   srtop.reveal(".about-us", { delay: 400 });
-//   srtop.reveal("#our-services", { delay: 400 });
-//   srtop.reveal("#portfolio", { delay: 400 });
-//   srtop.reveal("#clients-words", { delay: 400 });
-//   srtop.reveal("#faq", { delay: 400 });
-//   srtop.reveal("#contact-us", { delay: 400 });
-// }
+  // ScrollReveal().reveal(".about-us", {
+  //   delay: 600, // Delay for other sections
+  //   duration: 1000,
+  //   origin: "top",
+  //   distance: "80px",
+  // });
+}
 
 // Navbar Initialization
 function initNavbar() {
@@ -443,18 +433,14 @@ function addLinkToImage() {
 window.addEventListener("load", addLinkToImage);
 window.addEventListener("resize", addLinkToImage);
 
-// function initScrollReveal() {
-//   const sr = ScrollReveal({
-//     origin: "bottom",
-//     distance: "50px",
-//     duration: 1000,
-//     delay: 500,
-//     reset: false,
-//   });
+const cards = document.querySelectorAll(".glow-card");
+cards.forEach((card) => {
+  card.onmousemove = function (e) {
+    let x = e.pageX - card.offsetLeft;
+    let y = e.pageY - card.offsetTop;
 
-//   sr.reveal(".hero-content", { delay: 300 });
-//   sr.reveal(".stats-section", { delay: 400 });
-//   sr.reveal(".portfolio", { delay: 500 });
-//   sr.reveal(".faq-item", { delay: 600 });
-//   sr.reveal(".contact-us", { delay: 700 });
-// }
+    card.style.setProperty("--x", x + "px");
+    card.style.setProperty("--y", y + "px");
+  };
+});
+

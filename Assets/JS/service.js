@@ -34,13 +34,24 @@ document.querySelectorAll(".navbar-nav .nav-link").forEach((link) => {
 });
 
 // ScrollReveal animation initialization
-  // const srtop = ScrollReveal({
-  //   origin: "top",
-  //   distance: "80px",
-  //   duration: 1000,
-  //   reset: false,
-  // });
+const sr = ScrollReveal({
+  origin: "top",
+  distance: "80px",
+  duration: 1000,
+  reset: false,
+});
 
-  // srtop.reveal("#our-services", { delay: 400 });
-  // srtop.reveal(".row2", { delay: 600 });
+sr.reveal("#our-services .mb-4", { delay: 200 });
+sr.reveal(".row1", { delay: 400 });
+sr.reveal(".row2", { delay: 600 });
 
+const cards = document.querySelectorAll(".glow-card");
+cards.forEach((card) => {
+  card.onmousemove = function (e) {
+    let x = e.pageX - card.offsetLeft;
+    let y = e.pageY - card.offsetTop;
+
+    card.style.setProperty("--x", x + "px");
+    card.style.setProperty("--y", y + "px");
+  };
+});
