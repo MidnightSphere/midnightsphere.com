@@ -444,3 +444,44 @@ cards.forEach((card) => {
   };
 });
 
+
+// Function to check if the Contact Us section is in view (partially or fully)
+function isSectionInView(section) {
+  const rect = section.getBoundingClientRect();
+  return (
+    rect.top < window.innerHeight && 
+    rect.bottom > 0
+  );
+}
+
+// Function to check if the Contact Us section is in view (partially or fully)
+function isSectionInView(section) {
+  const rect = section.getBoundingClientRect();
+  return (
+    rect.top < window.innerHeight && 
+    rect.bottom > 0
+  );
+}
+
+// Select the contact section and WhatsApp button
+const contactSection = document.getElementById('contact-us');
+const whatsappButton = document.getElementById('whatsappButton');
+
+// Add a scroll event listener to toggle the WhatsApp button
+window.addEventListener('scroll', () => {
+  if (isSectionInView(contactSection)) {
+    whatsappButton.style.display = 'flex'; // Show the button
+    whatsappButton.style.animation = 'slide-down 0.5s ease-out forwards'; // Trigger slide-down animation
+  } else {
+    whatsappButton.style.display = 'none'; // Hide the button
+    whatsappButton.style.opacity = '0'; // Reset opacity for reanimation
+  }
+});
+
+// Ensure button state is correct on page load
+window.addEventListener('load', () => {
+  if (isSectionInView(contactSection)) {
+    whatsappButton.style.display = 'flex';
+    whatsappButton.style.animation = 'slide-down 0.5s ease-out forwards';
+  }
+});
