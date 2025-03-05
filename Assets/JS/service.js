@@ -8,16 +8,16 @@ menuToggle.addEventListener("click", function () {
 
   // Toggle menu icon
   if (isExpanded) {
-    menuIcon.innerHTML = "&#9776;"; // Hamburger Icon
+    menuIcon.innerHTML = "&#9776;"; 
   } else {
-    menuIcon.innerHTML = "&times;"; // Close Icon
+    menuIcon.innerHTML = "&times;";
   }
 });
 
 // Reset menu icon when menu is hidden
 navbarNav.addEventListener("hidden.bs.collapse", function () {
   const menuIcon = document.querySelector(".menu-icon");
-  menuIcon.innerHTML = "&#9776;"; // Reset to Hamburger Icon
+  menuIcon.innerHTML = "&#9776;"; 
 });
 
 // Automatically close the menu when a link is clicked
@@ -45,13 +45,15 @@ sr.reveal("#our-services .mb-4", { delay: 200 });
 sr.reveal(".row1", { delay: 400 });
 sr.reveal(".row2", { delay: 600 });
 
-const cards = document.querySelectorAll(".glow-card");
-cards.forEach((card) => {
-  card.onmousemove = function (e) {
-    let x = e.pageX - card.offsetLeft;
-    let y = e.pageY - card.offsetTop;
+const cards = document.querySelectorAll('.glow-card');
 
-    card.style.setProperty("--x", x + "px");
-    card.style.setProperty("--y", y + "px");
-  };
+cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        card.style.setProperty('--x', `${x}px`);
+        card.style.setProperty('--y', `${y}px`);
+    });
 });

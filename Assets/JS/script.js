@@ -1,11 +1,10 @@
-// Run this script when the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
-  initNavbar(); // Initialize navbar functionality
-  showSplashScreen(); // Show the splash screen if applicable
-  initObservers(); // Initialize IntersectionObservers for animations
+  initNavbar();
+  showSplashScreen();
+  initObservers();
+  observeSplashScreen();
 });
 
-// Show Splash Screen Logic
 function showSplashScreen() {
   const splashScreen = document.getElementById("splash-screen");
   const mainContent = document.getElementById("main-content");
@@ -20,20 +19,71 @@ function showSplashScreen() {
         // Start animations after splash screen
         startStatAnimation();
         setTimeout(() => {
-          initScrollReveal(); // Initialize ScrollReveal animations after the splash screen
-        }, 100); // Slight delay after showing main content
-      }, 1000); // Splash screen fade-out animation duration
-    }, 2500); // Splash screen delay
+          initScrollReveal();
+        }, 100);
+      }, 1000);
+    }, 2500);
     sessionStorage.setItem("splashShown", "true");
   } else {
-    // If splash screen was already shown, proceed without delay
     if (splashScreen) splashScreen.style.display = "none";
     if (mainContent) mainContent.style.display = "block";
 
-    // Start animations immediately if splash screen was already shown
     startStatAnimation();
-    initScrollReveal(); // Initialize ScrollReveal animations without delay
+    initScrollReveal();
+    revealAboutImage();
   }
+}
+
+var Tawk_API = Tawk_API || {},
+  Tawk_LoadStart = new Date();
+
+function loadChatbot() {
+  var s1 = document.createElement("script"),
+    s0 = document.getElementsByTagName("script")[0];
+  s1.async = true;
+  s1.src = "https://embed.tawk.to/67b4a7942247f51906aa70cd/1ikcqt7jm";
+  s1.charset = "UTF-8";
+  s1.setAttribute("crossorigin", "*");
+  s0.parentNode.insertBefore(s1, s0);
+}
+
+function observeSplashScreen() {
+  var splashScreen = document.getElementById("splash-screen");
+
+  if (splashScreen) {
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        if (mutation.attributeName === "style") {
+          var style = window.getComputedStyle(splashScreen);
+          if (style.display === "none" || style.opacity === "0") {
+            loadChatbot();
+            observer.disconnect();
+          }
+        }
+      });
+    });
+
+    observer.observe(splashScreen, { attributes: true });
+
+    setTimeout(function () {
+      if (window.getComputedStyle(splashScreen).display === "none") {
+        loadChatbot();
+      }
+    });
+  } else {
+    loadChatbot();
+  }
+}
+
+// Function for About Image Animation (Bottom Reveal)
+function revealAboutImage() {
+  const sr = ScrollReveal();
+  sr.reveal(".aboutimg", {
+    origin: "bottom",
+    distance: "80px",
+    duration: 1000,
+    delay: 200,
+  });
 }
 
 // ScrollReveal animation initialization
@@ -46,26 +96,19 @@ function initScrollReveal() {
   });
 
   sr.reveal(".about-us-title", { delay: 200 });
-  sr.reveal(".about-us-content", { delay: 400 });
+  sr.reveal(".about-text", { delay: 400 });
   sr.reveal(".read-more-btn", { delay: 200 });
   sr.reveal("#our-services .mb-4", { delay: 600 });
   sr.reveal(".service-card", { delay: 600 });
   sr.reveal("#servicebtn", { delay: 400 });
-  sr.reveal("#portfolio .mb-4", { delay: 200 });
-  sr.reveal("#portfolio .mb-5", { delay: 200 });
-  sr.reveal(".portfolio-card", { delay: 200 });
+  sr.reveal("#project .mb-4", { delay: 200 });
+  sr.reveal("#project .mb-5", { delay: 200 });
+  sr.reveal(".project-card", { delay: 200 });
   sr.reveal("#clients-words .mb-4", { delay: 200 });
   sr.reveal("#clients-words .mb-5", { delay: 200 });
   sr.reveal(".testimonial-card", { delay: 200 });
   sr.reveal("#faq", { delay: 400 });
   sr.reveal(".contact-us", { delay: 400 });
-
-  // ScrollReveal().reveal(".about-us", {
-  //   delay: 600, // Delay for other sections
-  //   duration: 1000,
-  //   origin: "top",
-  //   distance: "80px",
-  // });
 }
 
 // Navbar Initialization
@@ -76,35 +119,35 @@ function initNavbar() {
 
   if (navbarToggle && navbarMenu && menuIcon) {
     const bsCollapse = new bootstrap.Collapse(navbarMenu, {
-      toggle: false, // Disable automatic toggling
+      toggle: false,
     });
 
     // Toggle the menu and update the icon
     navbarToggle.addEventListener("click", function () {
       if (navbarMenu.classList.contains("show")) {
-        bsCollapse.hide(); // Collapse the menu
-        menuIcon.innerHTML = "&#9776;"; // Hamburger Icon
+        bsCollapse.hide();
+        menuIcon.innerHTML = "&#9776;";
       } else {
-        bsCollapse.show(); // Expand the menu
-        menuIcon.innerHTML = "&times;"; // Close Icon
+        bsCollapse.show();
+        menuIcon.innerHTML = "&times;";
       }
     });
 
     // Listen for Bootstrap collapse events to reset the icon
     navbarMenu.addEventListener("hidden.bs.collapse", function () {
-      menuIcon.innerHTML = "&#9776;"; // Reset to Hamburger Icon
+      menuIcon.innerHTML = "&#9776;";
     });
 
     navbarMenu.addEventListener("shown.bs.collapse", function () {
-      menuIcon.innerHTML = "&times;"; // Set to Close Icon
+      menuIcon.innerHTML = "&times;";
     });
 
     // Automatically close the menu and reset the icon when a link is clicked
     document.querySelectorAll(".navbar-nav .nav-link").forEach((link) => {
       link.addEventListener("click", () => {
         if (navbarMenu.classList.contains("show")) {
-          bsCollapse.hide(); // Collapse the menu
-          menuIcon.innerHTML = "&#9776;"; // Reset to Hamburger Icon
+          bsCollapse.hide();
+          menuIcon.innerHTML = "&#9776;";
         }
       });
     });
@@ -112,12 +155,12 @@ function initNavbar() {
     // Close the menu when clicking outside
     document.addEventListener("click", function (event) {
       if (
-        navbarMenu.classList.contains("show") && // Check if the menu is open
-        !navbarMenu.contains(event.target) && // Click is outside the menu
-        !navbarToggle.contains(event.target) // Click is not on the toggle button
+        navbarMenu.classList.contains("show") &&
+        !navbarMenu.contains(event.target) &&
+        !navbarToggle.contains(event.target)
       ) {
-        bsCollapse.hide(); // Collapse the menu
-        menuIcon.innerHTML = "&#9776;"; // Reset to Hamburger Icon
+        bsCollapse.hide();
+        menuIcon.innerHTML = "&#9776;";
       }
     });
   }
@@ -131,12 +174,12 @@ function startStatAnimation() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            animateNumbers(); // Trigger animation
-            statsObserver.unobserve(entry.target); // Stop observing after animation
+            animateNumbers();
+            statsObserver.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.5 } // Trigger animation when 50% of the section is visible
+      { threshold: 0.5 }
     );
 
     statsObserver.observe(statsSection);
@@ -158,7 +201,7 @@ function animateNumbers() {
         stat.innerText = Math.ceil(current);
         setTimeout(updateCount, 30);
       } else {
-        stat.innerText = target; // End at the exact target value
+        stat.innerText = target;
       }
     };
 
@@ -180,7 +223,6 @@ function initObservers() {
             navbar.classList.add("navbar-colored");
             navbar.classList.remove("navbar-white");
 
-            // For collapsed navbar in view of hero section
             if (navbarCollapse) {
               navbarCollapse.classList.add("bg-colored");
               navbarCollapse.classList.remove("bg-white");
@@ -189,7 +231,6 @@ function initObservers() {
             navbar.classList.add("navbar-white");
             navbar.classList.remove("navbar-colored");
 
-            // For collapsed navbar when hero section is out of view
             if (navbarCollapse) {
               navbarCollapse.classList.add("bg-white");
               navbarCollapse.classList.remove("bg-colored");
@@ -203,20 +244,20 @@ function initObservers() {
     observer.observe(heroSection);
   }
 
-  startStatAnimation(); // Ensure stats animation observer is initialized
+  startStatAnimation();
 }
 
 // Scroll-Based Active Link Logic
 document.addEventListener("DOMContentLoaded", function () {
-  const navbarLinks = document.querySelectorAll(".nav-link"); // All navbar links
-  const sections = document.querySelectorAll("section"); // All sections
-  const offset = document.querySelector("nav").offsetHeight; // Navbar height
+  const navbarLinks = document.querySelectorAll(".nav-link");
+  const sections = document.querySelectorAll("section");
+  const offset = document.querySelector("nav").offsetHeight;
 
   // Special sections that define the "Home" link area
   const homeSections = [
     "hero-section",
     "stats-section",
-    "portfolio",
+    "project",
     "faq",
     "clients-words",
   ];
@@ -226,14 +267,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to highlight active link based on scroll position
   function setActiveLink() {
-    const scrollPosition = window.scrollY + offset + 1; // Current scroll position + offset
+    const scrollPosition = window.scrollY + offset + 1;
 
-    let isHomeActive = false; // Flag for home link
-    let isContactActive = false; // Flag for "Contact Us" link
+    let isHomeActive = false;
+    let isContactActive = false;
 
     sections.forEach((section) => {
-      const sectionTop = section.offsetTop; // Section's top position
-      const sectionHeight = section.offsetHeight; // Section's height
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
       const link = document.querySelector(`.nav-link[href="#${section.id}"]`);
 
       // Check if the current scroll position is within the section's boundaries
@@ -342,11 +383,11 @@ function sendMail() {
   emailjs
     .send("service_i6qa9yh", "template_tu8d5ms", parms)
     .then(() => {
-      showAlert("Email Sent Successfully!", "success"); // Custom alert for success
+      showAlert("Email Sent Successfully!", "success");
     })
     .catch((error) => {
       console.error("Error:", error);
-      showAlert("Failed to send email. Please try again.", "error"); // Custom alert for error
+      showAlert("Failed to send email. Please try again.", "error");
     });
 }
 
@@ -358,7 +399,7 @@ function showAlert(message, type = "success") {
 
   // Create alert box
   const alertBox = document.createElement("div");
-  alertBox.className = `custom-alert ${type}`; // Use template literals for class names
+  alertBox.className = `custom-alert ${type}`;
   alertBox.textContent = message;
 
   // Create OK button
@@ -388,11 +429,11 @@ function toggleButtonVisibility() {
   // Check screen width
   if (window.innerWidth >= 1024) {
     buttons.forEach((button) => {
-      button.style.display = "block"; // Show buttons for larger screens
+      button.style.display = "block";
     });
   } else {
     buttons.forEach((button) => {
-      button.style.display = "none"; // Hide buttons for smaller screens
+      button.style.display = "none";
     });
   }
 }
@@ -402,19 +443,18 @@ window.addEventListener("load", toggleButtonVisibility);
 window.addEventListener("resize", toggleButtonVisibility);
 
 function addLinkToImage() {
-  const portfolioCards = document.querySelectorAll(".portfolio-card");
+  const projectCards = document.querySelectorAll(".project-card");
 
-  portfolioCards.forEach((card) => {
+  projectCards.forEach((card) => {
     const image = card.querySelector("img");
     const link = card.querySelector("a.view-button");
 
     if (window.innerWidth <= 1024) {
-      // Wrap the image with the link
       if (!image.parentElement.classList.contains("link-wrapper")) {
         const wrapper = document.createElement("a");
         wrapper.href = link.href;
         wrapper.className = "link-wrapper";
-        wrapper.target = "_blank"; // Opens in a new tab
+        wrapper.target = "_blank";
         wrapper.appendChild(image.cloneNode(true));
         image.replaceWith(wrapper);
       }
@@ -434,54 +474,49 @@ window.addEventListener("load", addLinkToImage);
 window.addEventListener("resize", addLinkToImage);
 
 const cards = document.querySelectorAll(".glow-card");
+
 cards.forEach((card) => {
-  card.onmousemove = function (e) {
-    let x = e.pageX - card.offsetLeft;
-    let y = e.pageY - card.offsetTop;
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-    card.style.setProperty("--x", x + "px");
-    card.style.setProperty("--y", y + "px");
-  };
+    card.style.setProperty("--x", `${x}px`);
+    card.style.setProperty("--y", `${y}px`);
+  });
 });
-
 
 // Function to check if the Contact Us section is in view (partially or fully)
 function isSectionInView(section) {
   const rect = section.getBoundingClientRect();
-  return (
-    rect.top < window.innerHeight && 
-    rect.bottom > 0
-  );
+  return rect.top < window.innerHeight && rect.bottom > 0;
 }
 
 // Function to check if the Contact Us section is in view (partially or fully)
 function isSectionInView(section) {
   const rect = section.getBoundingClientRect();
-  return (
-    rect.top < window.innerHeight && 
-    rect.bottom > 0
-  );
+  return rect.top < window.innerHeight && rect.bottom > 0;
 }
 
 // Select the contact section and WhatsApp button
-const contactSection = document.getElementById('contact-us');
-const whatsappButton = document.getElementById('whatsappButton');
+const contactSection = document.getElementById("contact-us");
+const whatsappButton = document.getElementById("whatsappButton");
 
 // Add a scroll event listener to toggle the WhatsApp button
-window.addEventListener('scroll', () => {
+window.addEventListener("scroll", () => {
   if (isSectionInView(contactSection)) {
-    whatsappButton.style.display = 'flex'; // Show the button
-    whatsappButton.style.animation = 'slide-down 0.5s ease-out forwards'; // Trigger slide-down animation
+    whatsappButton.style.display = "flex";
+    whatsappButton.style.animation = "slide-down 0.5s ease-out forwards";
   } else {
-    whatsappButton.style.display = 'none'; // Hide the button
-    whatsappButton.style.opacity = '0'; // Reset opacity for reanimation
+    whatsappButton.style.display = "none";
+    whatsappButton.style.opacity = "0";
   }
 });
 
 // Ensure button state is correct on page load
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
   if (isSectionInView(contactSection)) {
-    whatsappButton.style.display = 'flex';
-    whatsappButton.style.animation = 'slide-down 0.5s ease-out forwards';
+    whatsappButton.style.display = "flex";
+    whatsappButton.style.animation = "slide-down 0.5s ease-out forwards";
   }
 });
